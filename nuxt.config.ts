@@ -5,6 +5,11 @@ export default defineNuxtConfig({
     autoImport: true,
   },
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL,
+    }
+  },
   css: ['~/assets/css/main.css'],
   modules: [
     'vue-yandex-maps/nuxt',

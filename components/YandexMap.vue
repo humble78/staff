@@ -78,6 +78,8 @@ watch(search, async (val) => {
 
   if (val.split(/[,.]/).length === 4) {
     selectedSearch.value = val.split(',').map((x) => parseFloat(x)) as LngLat;
+    longitude.value = selectedSearch.value[0];
+    latitude.value = selectedSearch.value[1];
     return;
   }
 

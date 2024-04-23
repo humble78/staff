@@ -2,7 +2,7 @@ export interface PassportDetails {
   last_name: string,
   first_name: string,
   middle_name: string,
-  date_birth: string,
+  birth_date: string,
   gender: string,
   series_and_number: string,
   pinfl: string,
@@ -22,8 +22,6 @@ export interface ContactDetails {
 }
 
 export interface Employee {
-  // work_experiences: any[]
-  // avatar: any
   first_name: string,
   last_name: string,
   middle_name: string,

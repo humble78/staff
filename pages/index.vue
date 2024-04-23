@@ -11,15 +11,17 @@
 </template>
 
 <script lang="ts" setup>
-const tabIndex = ref(0);
 
+const config = useRuntimeConfig();
+
+const tabIndex = ref(0);
 const avatar = useAvatar();
 
 const passportDetails = ref<PassportDetails>({
   last_name: '',
   first_name: '',
   middle_name: '',
-  date_birth: '',
+  birth_date: '',
   gender: 'Выберите пол',
   series_and_number: '',
   pinfl: '',
@@ -38,30 +40,51 @@ const contactDetails = ref<ContactDetails>({
   apartment: '',
 });
 
-const { status, execute, data } = useAsyncData<{ id: number }>(async () => await $fetch(process.env + '/employee/', {
+const { status, execute, data } = useAsyncData<{ id: number }>(async () => await $fetch(config.public.apiBaseUrl + '/employee/', {
   method: 'post',
   body: {
-    ...passportDetails,
-    ...contactDetails,
+    // last_name: passportDetails.value.last_name,
+    // first_name: passportDetails.value.first_name,
+    // middle_name: passportDetails.value.middle_name,
+    // birth_date: passportDetails.value.birth_date,
+    // gender: passportDetails.value.gender,
+    // series_and_number: passportDetails.value.series_and_number,
+    // pinfl: passportDetails.value.pinfl,
+    // main_phone: contactDetails.value.main_phone,
+    // additional_phone: contactDetails.value.additional_phone,
+    // email: contactDetails.value.email,
+    // latitude: contactDetails.value.latitude,
+    // longitude: contactDetails.value.longitude,
+    // region: contactDetails.value.region,
+    // district: contactDetails.value.district,
+    // mahalla: contactDetails.value.mahalla,
+    // street: contactDetails.value.street,
+    // apartment: contactDetails.value.apartment,
+    ...passportDetails.value,
+    ...contactDetails.value,
   }
 }));
 
 const formData = new FormData();
 
-const { status: avatarStatus, execute: avatarRequest } = useAsyncData(async () => await $fetch(process.env + `/employee/${data.value?.id}/set-avatar/`, {
+const { status: avatarStatus, execute: avatarRequest } = useAsyncData(async () => await $fetch(config.public.apiBaseUrl + `/employee/${data.value?.id}/set-avatar/`, {
   method: 'post',
   body: formData,
 }));
 
 const handleReady = async () => {
+
   await execute();
 
-  if (status.value === 'success') {
-    formData.append('avatar', avatar.value);
-    await avatarRequest();
-  } else {
-    alert('something is wrong')
-  };
+  console.log(data.value);
+
+
+  // if (status.value === 'success') {
+  //   formData.append('avatar', avatar.value);
+  //   await avatarRequest();
+  // } else {
+  //   alert('something is wrong')
+  // };
 }
 
 </script>
