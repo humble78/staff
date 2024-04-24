@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
   },
-  devtools: { enabled: true },
+  // devtools: { enabled: true },
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL,
@@ -28,5 +28,7 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
+  
   
 })

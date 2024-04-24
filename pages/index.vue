@@ -63,28 +63,28 @@ const { status, execute, data } = useAsyncData<{ id: number }>(async () => await
     ...passportDetails.value,
     ...contactDetails.value,
   }
-}));
+},), { immediate: false, server: false });
 
 const formData = new FormData();
 
 const { status: avatarStatus, execute: avatarRequest } = useAsyncData(async () => await $fetch(config.public.apiBaseUrl + `/employee/${data.value?.id}/set-avatar/`, {
   method: 'post',
   body: formData,
-}));
+}), { immediate: false, server: false });
 
 const handleReady = async () => {
 
+  passportDetails.value.birth_date = passportDetails.value.birth_date.replaceAll('.', '-');
+  passportDetails.value.series_and_number = passportDetails.value.series_and_number.replace(/\s/g, '').toString();
+
   await execute();
 
-  console.log(data.value);
-
-
-  // if (status.value === 'success') {
-  //   formData.append('avatar', avatar.value);
-  //   await avatarRequest();
-  // } else {
-  //   alert('something is wrong')
-  // };
+  if (status.value === 'success') {
+    formData.append('avatar', avatar.value);
+    await avatarRequest();
+  } else {
+    alert('something is wrong')
+  };
 }
 
 </script>

@@ -68,7 +68,7 @@
           </label>
 
           <div class="w-80">
-            <vue-tailwind-datepicker class="max-w-80" v-model="dateBirthVal.gV" v-slot="{ placeholder }" as-single
+            <vue-tailwind-datepicker class="max-w-80" v-model="data.birth_date" v-slot="{ placeholder }" as-single
               :formatter="{
                 date: 'DD.MM.YYYY',
                 month: 'MMM',
@@ -271,12 +271,6 @@ const selectOption = (value: string) => {
 const handleDateFocusout = (e: Event) => {
   if (data.value.birth_date === '') dateFlag.value = false;
   else dateFlag.value = !/^(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0-2])\.(19[5-9]\d|20\d{2})$/.test(data.value.birth_date);
-
-  // if (dateFlag.value) {
-  //   data.value.date_birth = dateBirthVal.value.sV;
-  //   console.log(data.value.date_birth);
-
-  // }
 }
 
 const changeFullNameFields = (event: Event) => {
